@@ -4,93 +4,76 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ÉlanVie - Accouchement</title>
+  <title>Formulaire d'Accouchement - ÉlanVie</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-</head>
-<body class="bg-pink-50 font-sans">
-  <div class="max-w-4xl mx-auto mt-10 p-6 bg-white rounded-xl shadow-md">
-    <h1 class="text-3xl font-bold text-center text-pink-700 mb-6">Formulaire d'Accouchement</h1>
-
-    <!-- Identité de la mère -->
-    <h2 class="text-xl font-semibold text-gray-800 mb-4">Identité de la mère</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-      <input name="nom" type="text" placeholder="Nom et Prénoms" class="p-3 border rounded-xl">
-      <input name="age" type="number" placeholder="Âge" class="p-3 border rounded-xl">
-      <input name="numero_dossier" type="text" placeholder="N° de Dossier" class="p-3 border rounded-xl">
-      <input name="date_accouchement" type="date" placeholder="Date de l'accouchement" class="p-3 border rounded-xl">
-    </div>
-
-    <!-- Données d'accouchement -->
-    <h2 class="text-xl font-semibold text-gray-800 mb-4">Travail & Accouchement</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-      <input name="dilatation" type="text" placeholder="Dilatation (cm)" class="p-3 border rounded-xl">
-      <input name="descente" type="text" placeholder="Descente (étage)" class="p-3 border rounded-xl">
-      <input name="contractions" type="text" placeholder="Contractions" class="p-3 border rounded-xl">
-      <input name="pouls" type="text" placeholder="Pouls (PLS)" class="p-3 border rounded-xl">
-      <input name="perimetre_ombilical" type="text" placeholder="Périmètre ombilical (P.O)" class="p-3 border rounded-xl">
-    </div>
-
-    <!-- Naissance -->
-    <h2 class="text-xl font-semibold text-gray-800 mb-4">Naissance</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-      <input name="date_heure_naissance" type="datetime-local" class="p-3 border rounded-xl">
-      <select name="sexe_bebe" class="p-3 border rounded-xl">
-        <option value="">Sexe du nouveau-né</option>
-        <option>Féminin</option>
-        <option>Masculin</option>
-      </select>
-      <input name="complications" type="text" placeholder="Complications" class="p-3 border rounded-xl">
-    </div>
-
-    <!-- Actions -->
-    <div class="text-center mt-4">
-      <button onclick="saveAccouchement()" class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-6 rounded-xl">Enregistrer</button>
-      <button onclick="window.print()" class="ml-4 bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-6 rounded-xl">🖨️ Imprimer</button>
-    </div>
-
-    <!-- Résumé -->
-    <section id="accouchementSavedDisplay" class="hidden bg-gray-100 rounded-xl p-6 shadow-inner mt-10">
-      <h3 class="text-xl font-bold text-gray-700 mb-4">🗂️ Données enregistrées</h3>
-      <pre id="accouchementData" class="bg-white p-4 rounded border overflow-x-auto"></pre>
-      <button onclick="clearAccouchement()" class="mt-4 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded-xl">Supprimer les données enregistrées</button>
-    </section>
-
-    <!-- Graphique de partogramme -->
-    <div class="mt-10 text-center">
-      <h3 class="text-xl font-bold text-gray-800 mb-4">Graphique de Partogramme</h3>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/3/38/Partograph.svg" alt="Partogramme" class="mx-auto w-full max-w-xl border rounded-xl shadow">
-    </div>
-
-  </div>
-
   <script>
-    function saveAccouchement() {
-      const data = {};
-      document.querySelectorAll('input, select').forEach(el => {
-        if (el.name) data[el.name] = el.value;
-      });
-      localStorage.setItem('formulaire_accouchement', JSON.stringify(data));
-      alert("✅ Données enregistrées !");
-      showAccouchement();
-    }
-
-    function showAccouchement() {
-      const saved = localStorage.getItem('formulaire_accouchement');
-      const display = document.getElementById('accouchementSavedDisplay');
-      const output = document.getElementById('accouchementData');
-      if (saved) {
-        output.textContent = JSON.stringify(JSON.parse(saved), null, 2);
-        display.classList.remove('hidden');
-      } else {
-        alert("❌ Aucune donnée trouvée.");
-      }
-    }
-
-    function clearAccouchement() {
-      localStorage.removeItem('formulaire_accouchement');
-      document.getElementById('accouchementSavedDisplay').classList.add('hidden');
-      alert("🗑️ Données supprimées.");
+    function imprimerFormulaire() {
+      window.print();
     }
   </script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+  <div class="max-w-5xl mx-auto p-6 bg-white rounded-xl shadow-xl mt-10">
+    <h1 class="text-3xl font-bold text-pink-700 mb-6 text-center">🤱 Formulaire d'Accouchement</h1>
+
+    <form class="space-y-6 text-sm">
+
+      <h2 class="text-lg font-semibold text-gray-700">👩‍🍼 Identité de la mère</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <input type="text" placeholder="Nom et Prénoms" class="p-2 border rounded">
+        <input type="number" placeholder="Âge" class="p-2 border rounded">
+        <input type="text" placeholder="Adresse" class="p-2 border rounded">
+        <input type="text" placeholder="Téléphone" class="p-2 border rounded">
+        <input type="text" placeholder="Profession" class="p-2 border rounded">
+        <input type="text" placeholder="N° Dossier" class="p-2 border rounded">
+        <input type="text" placeholder="Gestité" class="p-2 border rounded">
+        <input type="text" placeholder="Parité" class="p-2 border rounded">
+        <input type="text" placeholder="Âge gestationnel (SA)" class="p-2 border rounded">
+        <input type="date" placeholder="Date d'accouchement" class="p-2 border rounded">
+        <input type="text" placeholder="Niveau d'étude" class="p-2 border rounded">
+        <input type="text" placeholder="Situation matrimoniale" class="p-2 border rounded">
+      </div>
+
+      <h2 class="text-lg font-semibold text-gray-700">🏥 Accouchement</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <input type="text" placeholder="Mode d'accouchement" class="p-2 border rounded">
+        <input type="text" placeholder="Durée du travail" class="p-2 border rounded">
+        <input type="text" placeholder="Position du bébé" class="p-2 border rounded">
+        <input type="text" placeholder="Présentation" class="p-2 border rounded">
+        <input type="text" placeholder="État du périnée" class="p-2 border rounded">
+        <input type="text" placeholder="Type de placenta" class="p-2 border rounded">
+        <input type="text" placeholder="Saignement (en ml)" class="p-2 border rounded">
+        <input type="text" placeholder="Complications pendant l'accouchement" class="p-2 border rounded">
+      </div>
+
+      <h2 class="text-lg font-semibold text-gray-700">👶 Nouveau-né</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <input type="text" placeholder="Sexe" class="p-2 border rounded">
+        <input type="number" placeholder="Poids de naissance (g)" class="p-2 border rounded">
+        <input type="number" placeholder="Taille (cm)" class="p-2 border rounded">
+        <input type="text" placeholder="APGAR (1min / 5min)" class="p-2 border rounded">
+        <input type="text" placeholder="État général du nouveau-né" class="p-2 border rounded">
+        <input type="text" placeholder="Réanimations" class="p-2 border rounded">
+      </div>
+
+      <h2 class="text-lg font-semibold text-gray-700">📤 Sortie</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <input type="date" placeholder="Date de sortie" class="p-2 border rounded">
+        <input type="text" placeholder="État de la mère à la sortie" class="p-2 border rounded">
+        <input type="text" placeholder="État du bébé à la sortie" class="p-2 border rounded">
+      </div>
+
+      <div class="mt-6 text-center">
+        <button type="button" onclick="imprimerFormulaire()" class="bg-green-600 text-white px-6 py-2 rounded shadow hover:bg-green-700">
+          🖨️ Imprimer ce formulaire
+        </button>
+      </div>
+
+      <div class="mt-10 border-t pt-6">
+        <h2 class="text-lg font-semibold text-gray-700 mb-2">📊 Graphique de partogramme (exemple)</h2>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Partograph_example.svg/1200px-Partograph_example.svg.png" class="w-full border rounded shadow">
+      </div>
+    </form>
+  </div>
 </body>
 </html>
