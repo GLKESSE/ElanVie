@@ -1,0 +1,57 @@
+...(contenu précédent inchangé)...
+
+<!-- Boutons de fin -->
+<section class="bg-white rounded-xl p-6 shadow-md mb-10 text-center">
+  <button onclick="saveFormData()" class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-6 rounded-xl mr-4">
+    Enregistrer
+  </button>
+  <button onclick="window.print()" class="bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-6 rounded-xl mr-4">
+    Imprimer ce formulaire
+  </button>
+  <button onclick="showSavedData()" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-xl">
+    Voir les données enregistrées
+  </button>
+</section>
+
+<!-- Affichage des données enregistrées -->
+<section id="savedDataDisplay" class="hidden bg-gray-100 rounded-xl p-6 shadow-inner mb-10">
+  <h3 class="text-xl font-bold text-gray-700 mb-4">🗂️ Données enregistrées</h3>
+  <pre id="savedData" class="bg-white p-4 rounded border overflow-x-auto"></pre>
+  <button onclick="clearSavedData()" class="mt-4 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded-xl">
+    Supprimer les données enregistrées
+  </button>
+</section>
+
+<script>
+function saveFormData() {
+  const data = {};
+  document.querySelectorAll('input, select, textarea').forEach(el => {
+    if (el.name) {
+      data[el.name] = el.value;
+    }
+  });
+  localStorage.setItem('formulaire_accouchement', JSON.stringify(data));
+  alert("✅ Données enregistrées localement avec succès !");
+}
+
+function showSavedData() {
+  const saved = localStorage.getItem('formulaire_accouchement');
+  const display = document.getElementById('savedDataDisplay');
+  const output = document.getElementById('savedData');
+  if (saved) {
+    const json = JSON.parse(saved);
+    output.textContent = JSON.stringify(json, null, 2);
+    display.classList.remove('hidden');
+  } else {
+    alert("❌ Aucune donnée enregistrée trouvée.");
+  }
+}
+
+function clearSavedData() {
+  localStorage.removeItem('formulaire_accouchement');
+  document.getElementById('savedDataDisplay').classList.add('hidden');
+  alert("🗑️ Données supprimées.");
+}
+</script>
+
+<!-- Fin du formulaire -->
