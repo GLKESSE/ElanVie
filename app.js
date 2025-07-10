@@ -1,0 +1,1 @@
+// Code JavaScript de base pour le prototype ÉlanVie
