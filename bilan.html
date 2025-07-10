@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bilan Mensuel - ÉlanVie</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 font-sans">
+  <div class="max-w-6xl mx-auto mt-10 p-6 bg-white rounded-xl shadow-md">
+    <h1 class="text-3xl font-bold text-center text-pink-700 mb-8">📆 Bilan Mensuel Automatique</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-white font-bold text-xl">
+      <div class="bg-pink-600 p-6 rounded-xl text-center">
+        <p>Total Patientes</p>
+        <p id="total_patientes">0</p>
+      </div>
+      <div class="bg-green-600 p-6 rounded-xl text-center">
+        <p>Nombre Accouchements</p>
+        <p id="nombre_accouchements">0</p>
+      </div>
+      <div class="bg-indigo-600 p-6 rounded-xl text-center">
+        <p>Taux d'accouchement</p>
+        <p id="taux_accouchement">0%</p>
+      </div>
+      <div class="bg-yellow-500 p-6 rounded-xl text-center">
+        <p>Nouveau-nés ♀</p>
+        <p id="feminin">0</p>
+      </div>
+      <div class="bg-blue-500 p-6 rounded-xl text-center">
+        <p>Nouveau-nés ♂</p>
+        <p id="masculin">0</p>
+      </div>
+      <div class="bg-purple-500 p-6 rounded-xl text-center">
+        <p>Consultations CPN</p>
+        <p id="cpn">0</p>
+      </div>
+      <div class="bg-gray-700 p-6 rounded-xl text-center">
+        <p>Consultations Curatives</p>
+        <p id="curative">0</p>
+      </div>
+      <div class="bg-red-500 p-6 rounded-xl text-center">
+        <p>Consultations CPON</p>
+        <p id="cpon">0</p>
+      </div>
+    </div>
+
+    <div class="mt-8 text-center">
+      <button onclick="imprimer()" class="bg-pink-700 hover:bg-pink-800 text-white px-6 py-3 rounded-xl font-semibold">
+        🖨️ Imprimer le Bilan
+      </button>
+    </div>
+  </div>
+
+  <script>
+    function chargerBilan() {
+      const bilan = {
+        total_patientes: 120,
+        nombre_accouchements: 45,
+        taux_accouchement: "37.5%",
+        feminin: 23,
+        masculin: 22,
+        cpn: 60,
+        curative: 35,
+        cpon: 25
+      };
+      Object.keys(bilan).forEach(id => {
+        document.getElementById(id).textContent = bilan[id];
+      });
+    }
+
+    function imprimer() {
+      window.print();
+    }
+
+    window.onload = chargerBilan;
+  </script>
+</body>
+</html>
