@@ -8,3 +8,39 @@
     color: #333;
     border-radius: 5px;
 }
+
+form {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+}
+
+fieldset {
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+legend {
+    font-weight: bold;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+@media print {
+    .btn-retour, button {
+        display: none;
+    }
+    body {
+        background: #fff;
+        color: #000;
+    }
+}

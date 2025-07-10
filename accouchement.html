@@ -9,7 +9,41 @@
 <body>
     <a href="index.html" class="btn-retour">← Retour à l'accueil</a>
     <h1>Formulaire d'Accouchement</h1>
-    <!-- Form content goes here -->
+
+    <form id="form-accouchement">
+        <fieldset>
+            <legend>Identification</legend>
+            <label>Nom et Prénoms: <input type="text" name="nom"></label><br>
+            <label>Âge: <input type="number" name="age"></label><br>
+            <label>N° Dossier: <input type="text" name="dossier"></label><br>
+        </fieldset>
+
+        <fieldset>
+            <legend>Travail</legend>
+            <label>Dilatation (cm): <input type="number" name="dilatation"></label><br>
+            <label>Descente (étage): <input type="number" name="descente"></label><br>
+            <label>Contractions: <input type="text" name="contractions"></label><br>
+        </fieldset>
+
+        <fieldset>
+            <legend>Naissance</legend>
+            <label>Date/Heure: <input type="datetime-local" name="naissance_date"></label><br>
+            <label>Sexe du nouveau-né: 
+                <select name="sexe">
+                    <option value="F">Féminin</option>
+                    <option value="M">Masculin</option>
+                </select>
+            </label><br>
+        </fieldset>
+
+        <button type="button" onclick="imprimer()">🖨️ Imprimer ce formulaire</button>
+    </form>
+
+    <div id="graphique">
+        <h2>Graphique d'accouchement</h2>
+        <!-- Graphique auto ici -->
+    </div>
+
     <script src="accouchement.js"></script>
 </body>
 </html>
