@@ -1,48 +1,103 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ÉlanVie – Consultation Curative</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ÉlanVie - Consultation Curative</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-    <header>
-        <img src="logo.png" alt="Logo ÉlanVie" class="logo">
-        <h1>ÉlanVie – Consultation Curative</h1>
-    </header>
+<body class="bg-pink-50 font-sans">
+  <div class="max-w-4xl mx-auto mt-10 p-6 bg-white rounded-xl shadow-md">
+    <h1 class="text-3xl font-bold text-center text-pink-700 mb-6">Consultation Curative</h1>
 
-    <main>
-        <a href="index.html" class="btn-home">Retour à l’accueil</a>
-        <h2>Nouvelle Consultation Curative</h2>
+    <!-- Identification -->
+    <h2 class="text-xl font-semibold text-gray-800 mb-4">Identification de la patiente</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+      <input name="nom" type="text" placeholder="Nom et prénoms" class="p-3 border rounded-xl">
+      <input name="age" type="number" placeholder="Âge" class="p-3 border rounded-xl">
+      <input name="numero_dossier" type="text" placeholder="N° dossier" class="p-3 border rounded-xl">
+      <input name="date_consultation" type="date" class="p-3 border rounded-xl">
+      <input name="adresse" type="text" placeholder="Adresse/localité" class="p-3 border rounded-xl">
+      <input name="telephone" type="tel" placeholder="Téléphone" class="p-3 border rounded-xl">
+    </div>
 
-        <form>
-            <fieldset>
-                <legend>Informations Générales</legend>
-                <input type="text" placeholder="Nom et prénoms de la patiente">
-                <input type="text" placeholder="N° de dossier">
-                <input type="date" placeholder="Date de la consultation">
-            </fieldset>
+    <!-- Symptômes -->
+    <h2 class="text-xl font-semibold text-gray-800 mb-4">Motif de consultation</h2>
+    <div class="mb-6">
+      <textarea name="symptomes" rows="3" placeholder="Symptômes présentés" class="w-full p-3 border rounded-xl mb-3"></textarea>
+      <input name="duree_symptomes" type="text" placeholder="Durée des symptômes" class="p-3 border rounded-xl w-full mb-3">
+      <input name="antecedents" type="text" placeholder="Antécédents médicaux/obstétricaux" class="p-3 border rounded-xl w-full">
+    </div>
 
-            <fieldset>
-                <legend>Détails Médicaux</legend>
-                <textarea placeholder="Motif de la consultation / Symptômes"></textarea>
-                <textarea placeholder="Diagnostic médical"></textarea>
-                <textarea placeholder="Traitement prescrit"></textarea>
-                <textarea placeholder="Évolution ou autres observations"></textarea>
-            </fieldset>
+    <!-- Examen clinique -->
+    <h2 class="text-xl font-semibold text-gray-800 mb-4">Examen clinique</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+      <input name="temperature" type="text" placeholder="Température" class="p-3 border rounded-xl">
+      <input name="ta" type="text" placeholder="Tension artérielle (TA)" class="p-3 border rounded-xl">
+      <input name="fc" type="text" placeholder="Fréquence cardiaque" class="p-3 border rounded-xl">
+      <input name="po" type="text" placeholder="Périmètre ombilical (P.O)" class="p-3 border rounded-xl">
+      <input name="pls" type="text" placeholder="Pouls (PLS)" class="p-3 border rounded-xl">
+      <input name="observation" type="text" placeholder="Observation générale" class="p-3 border rounded-xl">
+    </div>
 
-            <fieldset>
-                <legend>Validation</legend>
-                <input type="text" placeholder="Nom et signature de la sage-femme">
-            </fieldset>
+    <!-- Diagnostic -->
+    <h2 class="text-xl font-semibold text-gray-800 mb-4">Diagnostic et traitement</h2>
+    <div class="mb-6">
+      <input name="diagnostic" type="text" placeholder="Diagnostic proposé" class="p-3 border rounded-xl w-full mb-3">
+      <textarea name="traitement" rows="2" placeholder="Médicaments prescrits" class="w-full p-3 border rounded-xl mb-3"></textarea>
+      <textarea name="conseils" rows="2" placeholder="Conseils donnés" class="w-full p-3 border rounded-xl"></textarea>
+    </div>
 
-            <button type="submit">Enregistrer</button>
-        </form>
-    </main>
+    <!-- Suivi -->
+    <h2 class="text-xl font-semibold text-gray-800 mb-4">Suivi</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+      <input name="date_prochain_rdv" type="date" class="p-3 border rounded-xl">
+      <input name="commentaires" type="text" placeholder="Commentaires supplémentaires" class="p-3 border rounded-xl">
+    </div>
 
-    <footer>
-        <p>© GLKESSE – Tous droits réservés.</p>
-    </footer>
+    <!-- Actions -->
+    <div class="text-center mt-4">
+      <button onclick="saveConsultation()" class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-6 rounded-xl">Enregistrer</button>
+      <button onclick="window.print()" class="ml-4 bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-6 rounded-xl">🖨️ Imprimer</button>
+    </div>
+
+    <!-- Résumé -->
+    <section id="consultationSavedDisplay" class="hidden bg-gray-100 rounded-xl p-6 shadow-inner mt-10">
+      <h3 class="text-xl font-bold text-gray-700 mb-4">🗂️ Données enregistrées</h3>
+      <pre id="consultationData" class="bg-white p-4 rounded border overflow-x-auto"></pre>
+      <button onclick="clearConsultation()" class="mt-4 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded-xl">Supprimer les données enregistrées</button>
+    </section>
+  </div>
+
+  <script>
+    function saveConsultation() {
+      const data = {};
+      document.querySelectorAll('input, textarea').forEach(el => {
+        if (el.name) data[el.name] = el.value;
+      });
+      localStorage.setItem('formulaire_consultation', JSON.stringify(data));
+      alert("✅ Données enregistrées !");
+      showConsultation();
+    }
+
+    function showConsultation() {
+      const saved = localStorage.getItem('formulaire_consultation');
+      const display = document.getElementById('consultationSavedDisplay');
+      const output = document.getElementById('consultationData');
+      if (saved) {
+        output.textContent = JSON.stringify(JSON.parse(saved), null, 2);
+        display.classList.remove('hidden');
+      } else {
+        alert("❌ Aucune donnée trouvée.");
+      }
+    }
+
+    function clearConsultation() {
+      localStorage.removeItem('formulaire_consultation');
+      document.getElementById('consultationSavedDisplay').classList.add('hidden');
+      alert("🗑️ Données supprimées.");
+    }
+  </script>
 </body>
 </html>
