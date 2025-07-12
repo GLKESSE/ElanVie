@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gestion des Patientes - ÉlanVie</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f9f9f9; color: #333; }
+    h1 { color: #b30059; text-align: center; }
+    .form-container, .table-container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    label { display: block; margin-top: 10px; }
+    input { width: 100%; padding: 8px; margin-top: 5px; border-radius: 4px; border: 1px solid #ccc; }
+    button { margin-top: 15px; padding: 10px 20px; background: #b30059; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    button:hover { background: #99004d; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { padding: 10px; border-bottom: 1px solid #ccc; text-align: left; }
+    .actions button { margin-right: 5px; }
+  </style>
+</head>
+<body>
+  <h1>Gestion des Patientes</h1>
+  <div class="form-container">
+    <label>Nom et Prénoms</label><input type="text" id="nom">
+    <label>Âge</label><input type="number" id="age">
+    <label>N° de dossier</label><input type="text" id="dossier">
+    <label>Téléphone</label><input type="text" id="telephone">
+    <label>Adresse</label><input type="text" id="adresse">
+    <button onclick="ajouterPatiente()">Ajouter la patiente</button>
+  </div>
+
+  <div class="table-container">
+    <h2>Liste des Patientes</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Nom</th><th>Âge</th><th>Dossier</th><th>Téléphone</th><th>Adresse</th><th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="patientsTable"></tbody>
+    </table>
+  </div>
+
+<script>
+  let patients = JSON.parse(localStorage.getItem('patients') || "[]");
+
+  function afficherPatients() {
+    const table = document.getElementById('patientsTable');
+    table.innerHTML = '';
+    patients.forEach((p, i) => {
+      table.innerHTML += `
+        <tr>
+          <td>${p.nom}</td><td>${p.age}</td><td>${p.dossier}</td><td>${p.telephone}</td><td>${p.adresse}</td>
+          <td class="actions">
+            <button onclick="modifier(${i})">✏️</button>
+            <button onclick="supprimer(${i})">🗑️</button>
+          </td>
+        </tr>
+      `;
+    });
+  }
+
+  function ajouterPatiente() {
+    const nom = document.getElementById('nom').value;
+    const age = document.getElementById('age').value;
+    const dossier = document.getElementById('dossier').value;
+    const telephone = document.getElementById('telephone').value;
+    const adresse = document.getElementById('adresse').value;
+    if (!nom || !age || !dossier) {
+      alert("Nom, âge et dossier sont obligatoires.");
+      return;
+    }
+    patients.push({ nom, age, dossier, telephone, adresse });
+    localStorage.setItem('patients', JSON.stringify(patients));
+    afficherPatients();
+    document.querySelectorAll('input').forEach(input => input.value = '');
+  }
+
+  function supprimer(index) {
+    if (confirm("Supprimer cette patiente ?")) {
+      patients.splice(index, 1);
+      localStorage.setItem('patients', JSON.stringify(patients));
+      afficherPatients();
+    }
+  }
+
+  function modifier(index) {
+    const p = patients[index];
+    document.getElementById('nom').value = p.nom;
+    document.getElementById('age').value = p.age;
+    document.getElementById('dossier').value = p.dossier;
+    document.getElementById('telephone').value = p.telephone;
+    document.getElementById('adresse').value = p.adresse;
+    supprimer(index);
+  }
+
+  afficherPatients();
+</script>
+</body>
+</html>
