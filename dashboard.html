@@ -1,106 +1,28 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tableau de Bord - ÉlanVie</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f7f7f7;
-      margin: 20px;
-      color: #333;
-    }
-    h1 {
-      text-align: center;
-      color: #b30059;
-    }
-    .dashboard-container {
-      max-width: 1000px;
-      margin: auto;
-      background: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    .stat-box {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-      margin-bottom: 30px;
-    }
-    .stat {
-      background-color: #f1f1f1;
-      padding: 20px;
-      border-radius: 8px;
-      text-align: center;
-    }
-    canvas {
-      max-width: 100%;
-      height: auto;
-    }
-    .btn-container {
-      text-align: center;
-      margin-top: 30px;
-    }
-    button {
-      padding: 10px 20px;
-      background-color: #b30059;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #99004d;
-    }
-  </style>
+  <title>Tableau de Bord ÉlanVie</title>
+  <link rel="stylesheet" href="dashboard.css" />
 </head>
 <body>
-  <h1>Tableau de Bord - ÉlanVie</h1>
-  <div class="dashboard-container">
-    <div class="stat-box">
-      <div class="stat"><strong>Total patientes :</strong> 120</div>
-      <div class="stat"><strong>Consultations CPN :</strong> 98</div>
-      <div class="stat"><strong>Consultations Curatives :</strong> 42</div>
-      <div class="stat"><strong>Accouchements :</strong> 75</div>
-      <div class="stat"><strong>Consultations CPON :</strong> 65</div>
-      <div class="stat"><strong>Taux d'accouchement :</strong> 62%</div>
+  <div class="container">
+    <h1>Tableau de Bord Mensuel - ÉlanVie</h1>
+    <div class="stats">
+      <div>Total patientes : <strong id="total-patientes">0</strong></div>
+      <div>Accouchements : <strong id="accouchements">0</strong></div>
+      <div>Taux d’accouchement : <strong id="taux">0%</strong></div>
+      <div>Garçons : <strong id="garcons">0</strong> | Filles : <strong id="filles">0</strong></div>
     </div>
-
-    <h3>Répartition des naissances par sexe</h3>
-    <canvas id="sexeChart"></canvas>
-
-    <div class="btn-container">
-      <button onclick="window.print()">🖨️ Imprimer</button>
-    </div>
+    <canvas id="graphiqueActivite" width="400" height="200"></canvas>
+    <canvas id="graphiqueSexe" width="400" height="200"></canvas>
+    <button onclick="window.print()">🖨️ Imprimer le rapport</button>
+    <br><br>
+    <a href="index.html">← Retour à l’accueil</a>
   </div>
-
-  <script>
-    const ctx = document.getElementById('sexeChart').getContext('2d');
-    const sexeChart = new Chart(ctx, {
-      type: 'doughnut',
-      data: {
-        labels: ['Filles', 'Garçons'],
-        datasets: [{
-          data: [40, 35],
-          backgroundColor: ['#ff66b3', '#6699ff'],
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            position: 'bottom'
-          },
-          title: {
-            display: true,
-            text: 'Répartition Garçons / Filles'
-          }
-        }
-      }
-    });
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="dashboard.js"></script>
 </body>
 </html>
