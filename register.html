@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inscription - ÉlanVie</title>
+  <link rel="stylesheet" href="auth.css" />
+</head>
+<body>
+  <div class="auth-container">
+    <h2>Créer un compte ÉlanVie</h2>
+    <form id="registerForm">
+      <input type="text" placeholder="Nom complet" id="fullName" required />
+      <input type="email" placeholder="Email" id="registerEmail" required />
+      <input type="password" placeholder="Mot de passe" id="registerPassword" required />
+      <select id="accountType">
+        <option value="professionnel">Professionnel de santé</option>
+        <option value="patient">Patient</option>
+      </select>
+      <button type="submit">S’inscrire</button>
+      <p><a href="login.html">Déjà un compte ? Connexion</a></p>
+    </form>
+  </div>
+  <script src="auth.js"></script>
+</body>
+</html>
