@@ -1,0 +1,1 @@
+Système de rôles pour ÉlanVie. Ce dossier contient les fichiers de test du centre fictif.
